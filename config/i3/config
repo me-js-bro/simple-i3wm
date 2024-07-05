@@ -1,0 +1,15 @@
+# i3 config by Js Bro ( https://github.com/me-js-bro )
+
+set $mod Mod4
+set $alt Mod1
+
+included ~/.config/i3/configs/keybinds.conf
+included ~/.config/i3/configs/rules.conf
+included ~/.config/i3/configs/workspaces.conf
+included ~/.config/i3/configs/colors.conf
+included ~/.config/i3/configs/settings.conf
+included ~/.config/i3/configs/startup.conf
+
+exec --no-startup-id dex --autostart --environment i3
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id nm-applet
