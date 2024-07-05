@@ -19,21 +19,17 @@ configuration {
 /* ---- Window ---- */
 window {
     width:						700px;
-	/*height:						500px;*/
-    x-offset:                   0px;
-    y-offset:                   0px;
-    spacing:                    0px;
+    x-offset:                   -15px;
+    y-offset: 50px;
     padding:                    2px;
-    margin:                     0px; 
-    border:                     2px;
-    border-color:               @active-background;
+    border:                     0;
+    background-color:               transparent;
     cursor:                     "default";
-    location:                   center;
-    anchor:                     center;
+    location: northeast;
+    anchor: northeast;
     fullscreen:                 false;
     enabled:                    true;
     border-radius:              7px;
-    background-image:    		url("~/.config/i3/.cache/current.png", height);
  	
 }
 
@@ -58,11 +54,10 @@ imagebox {
 listbox {
     spacing:                    4px;
     orientation:                vertical;
-    children:                   [ "listview", "mode-switcher" ];
+    children:                   [ "listview" ];
     border-radius:              10px;
-    border:                     1px;
-    border-color:               @active-background;
-	background-color:		    @background;
+    border:                     0;
+	background-color:		    transparent;
 }
 
 /* ---- Inputbar ---- */
@@ -71,12 +66,11 @@ inputbar {
     text-color:                 @foreground;
     spacing:                    10px;
     padding:                    6px;
-    border-radius:              10px;
+    border-radius:              15px;
     border-color:               @foreground;
-	background-color:		    @background;
+	background-color:		    transparent;
     children:                   [ "textbox-prompt-colon", "entry" ];
-    border:                     1px;
-    border-color:               @active-background;
+    border:                     0;
 }
 
 textbox-prompt-colon {
@@ -110,7 +104,7 @@ listview {
 	fixed-height:                true;
 	fixed-columns:               true;
 	background-color:            transparent;
-	border-radius:             	 10px;
+	border:             	     0px;
 }
 
 /* ---- Element ---- */
@@ -124,22 +118,22 @@ element {
 }
 
 element normal.normal {
-    background-color:           inherit;
+    background-color:           transparent;
     text-color:                 @foreground;
 }
 
 element normal.urgent {
-    background-color:           inherit;
+    background-color:           transparent;
     text-color:                 @foreground;
 }
 
 element normal.active {
-    background-color:           inherit;
+    background-color:           transparent;
     text-color:                 @foreground;
 }
 
 element selected.normal {
-    background-color:           @selected-normal-background;
+    background-color:           @background;
     text-color:                 @foreground;
 }
 
