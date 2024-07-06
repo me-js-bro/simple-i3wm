@@ -23,6 +23,7 @@ dots=(
     polybar
     qt5ct
     qt6ct
+    ranger
     rofi
 )
 
