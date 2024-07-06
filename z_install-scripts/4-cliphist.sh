@@ -1,14 +1,20 @@
 #!/bin/bash
 
-scripts_dir=`dirname "$(realpath "$0")"`
-source "$scripts_dir/00-global.sh"
+# log files
+dir="$(dirname "$(realpath "$0")")"
+parent_dir="$(dirname "$dir")"
+log_dir="$parent_dir/Logs"
+log="$log_dir/clipboard_$(date +%d-%m-%y_).log"
+mkdir -p "$log_dir" && touch "$log"
+
+source "$dir/00-global.sh"
 
 pkgs=(
     rofi-greenclip
 )
 
 for pkg in "${pkgs[@]}"; do
-    install_Aur "$pkg"
+    install_Aur "$pkg" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
 done
 
 # Create Greenclip configuration
@@ -42,8 +48,10 @@ WantedBy=default.target
 EOF
 
 # Reload systemd user units and start Greenclip service
-systemctl --user daemon-reload
-systemctl --user enable greenclip.service
-systemctl --user start greenclip.service
+systemctl --user daemon-reload 2>&1 | tee -a "$log"
+systemctl --user enable greenclip.service 2>&1 | tee -a "$log"
+systemctl --user start greenclip.service 2>&1 | tee -a "$log"
 
-info ok "Greenclip and Rofi clipboard manager setup complete!"
+info ok "Greenclip and Rofi clipboard manager setup complete!" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
+exit 0
+clear && sleep 1

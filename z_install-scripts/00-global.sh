@@ -18,12 +18,6 @@ note="${blue} [ NOTE ] ${end}"
 qus="${yellow} [ QUESTION ] ${end}"
 err="${red} [ ERROR ] ${end}"
 
-# log files
-dir=`pwd`
-log_dir="$dir/Logs"
-log="$log_dir/pkg_install_$(date +%d-%m-%y_).log"
-mkdir -p "$log_dir" && touch "$log"
-
 # prompt message function
 info() {
     local action="$1"
@@ -34,13 +28,13 @@ info() {
         ;;
         ac) printf "$acc \n  $msg\n"
         ;;
-        ok) printf "$ok \n  $msg\n\n" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
+        ok) printf "$ok \n  $msg\n\n"
         ;;
         nt) printf "$note \n  $msg\n"
         ;;
         qs) printf "$qus \n  $msg\n"
         ;;
-        er) printf "$err \n  ${red}$msg${end}\n" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
+        er) printf "\n$err \n  ${red}$msg${end}\n"
         ;;
         *) echo "$msg"
         ;;

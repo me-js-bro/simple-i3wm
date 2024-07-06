@@ -1,8 +1,13 @@
 #!/bin/bash
 
-# install script dir
-scripts_dir=`dirname "$(realpath "$0")"`
-source $scripts_dir/00-global.sh
+# log files
+dir="$(dirname "$(realpath "$0")")"
+parent_dir="$(dirname "$dir")"
+log_dir="$parent_dir/Logs"
+log="$log_dir/main-packages_$(date +%d-%m-%y_).log"
+mkdir -p "$log_dir" && touch "$log"
+
+source "$dir/00-global.sh"
 
 # main packages
 packages=(
@@ -46,17 +51,17 @@ thunar=(
 
 # install main packages
 for pkgs in "${packages[@]}"; do
-    install "$pkgs"
+    install "$pkgs" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
 done
 
 # install aur packages
 for pkgs in "${aur_packages[@]}"; do
-    install_Aur "$pkgs"
+    install_Aur "$pkgs" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
 done
 
 # install thunar
 for pkgs in "${thunar[@]}"; do
-    install "$pkgs"
+    install "$pkgs" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
 done
-
+clear && sleep 1
 #____________ end ____________#
