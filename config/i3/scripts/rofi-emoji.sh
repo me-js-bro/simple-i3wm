@@ -2,7 +2,7 @@
 
 sed '1,/^### DATA ###$/d' $0 | 
 rofi -dmenu -config ~/.config/rofi/themes/rofi-emoji.rasi| 
-cut -d ' ' -f 1 | tr -d '\n' | wl-copy
+cut -d ' ' -f 1 | tr -d '\n' | xclip -selection clipboard
 
 exit
 

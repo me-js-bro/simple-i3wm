@@ -1,49 +1,18 @@
 #!/bin/bash
 
-# color defination
-red="\e[1;31m"
-green="\e[1;32m"
-yellow="\e[1;33m"
-blue="\e[1;34m"
-magenta="\e[1;1;35m"
-cyan="\e[1;36m"
-orange="\x1b[38;5;214m"
-end="\e[1;0m"
+# log files
+dir="$(dirname "$(realpath "$0")")"
+parent_dir="$(dirname "$dir")"
+log_dir="$parent_dir/Logs"
+log="$log_dir/touchpad_$(date +%d-%m-%y_).log"
+mkdir -p "$log_dir" && touch "$log"
 
-# texts
-att="${orange} [ ATTENTION ] ${end}"
-acc="${green} [ ACTION ] ${end}"
-ok="${cyan} [ OK ] ${end}"
-note="${blue} [ NOTE ] ${end}"
-qus="${yellow} [ QUESTION ] ${end}"
-err="${red} [ ERROR ] ${end}"
+source "$dir/00-global.sh"
 
-# prompt message function
-info() {
-    local action="$1"
-    local msg="$2"
-
-    case $action in
-        at) printf "$att \n  $msg\n" && sleep 1
-        ;;
-        ac) printf "$acc \n  $msg\n"
-        ;;
-        ok) printf "$ok \n  $msg\n" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
-        ;;
-        nt) printf "$note \n  $msg\n" && sleep 1
-        ;;
-        qs) printf "$qus \n  $msg\n"
-        ;;
-        er) printf "$err \n  $msg\n" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log") && sleep 1
-        ;;
-        *) echo "${yellow}$msg${end}"
-        ;;
-    esac
-}
 
 # Create the configuration directory if it doesn't exist
 info at "Creating configuration directory"
-sudo mkdir -p /etc/X11/xorg.conf.d
+sudo mkdir -p /etc/X11/xorg.conf.d 2>&1 | tee -a "$log"
 
 # Create the 40-libinput.conf file
 config_file="/etc/X11/xorg.conf.d/40-libinput.conf"
@@ -65,9 +34,10 @@ EOL
 
 # Provide feedback to the user
 if [ $? -eq 0 ]; then
-    info ok "Touchpad configuration file created successfully!"
+    info ok "Touchpad configuration file created successfully!" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
+    exit 0
 else
-    info er "Failed to create touchpad configuration file"
+    info er "Failed to create touchpad configuration file" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
     exit 1
 fi
 
@@ -75,7 +45,7 @@ fi
 touchpad_id=$(xinput list | grep -i touchpad | awk '{print $6}' | cut -d'=' -f2)
 
 if [ -z "$touchpad_id" ]; then
-    info at "No touchpad found. Exiting."
+    info at "No touchpad found. Exiting." 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
     exit 1
 fi
 
@@ -88,8 +58,9 @@ grep -qxF 'exec --no-startup-id xinput set-prop <your_touchpad_id> "libinput Nat
 
 # Provide feedback to the user
 if [ $? -eq 0 ]; then
-    info ok "xinput commands added to i3 startup file successfully!"
+    info ok "xinput commands added to i3 startup file successfully!" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
+    exit 0
 else
-    info er "Failed to add xinput commands to i3 startup file."
+    info er "Failed to add xinput commands to i3 startup file." 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
     exit 1
 fi
