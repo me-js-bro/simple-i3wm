@@ -35,7 +35,6 @@ EOL
 # Provide feedback to the user
 if [ $? -eq 0 ]; then
     info ok "Touchpad configuration file created successfully!" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
-    exit 0
 else
     info er "Failed to create touchpad configuration file" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
     exit 1
@@ -59,7 +58,6 @@ grep -qxF 'exec --no-startup-id xinput set-prop <your_touchpad_id> "libinput Nat
 # Provide feedback to the user
 if [ $? -eq 0 ]; then
     info ok "xinput commands added to i3 startup file successfully!" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
-    exit 0
 else
     info er "Failed to add xinput commands to i3 startup file." 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
     exit 1

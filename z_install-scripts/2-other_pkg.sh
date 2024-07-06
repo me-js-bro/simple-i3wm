@@ -29,7 +29,9 @@ other_packages=(
     pamixer
     pavucontrol
     python-pywal
+    python-pillow
     wget
+    xdotool
     xorg-xinput
     yad
 )

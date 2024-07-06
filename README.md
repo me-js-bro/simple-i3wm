@@ -55,6 +55,24 @@ A simple i3 window manager configuration with installation script
 9. System Updates
 10. Keyboard Switching ( if openbangla keyboard is installed )
 
+<br>
+
+<details align="center">
+  <summary>Click to see the screenshots</summary>
+  <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around;">
+    <img src="https://github.com/me-js-bro/Screen-Shots/blob/main/i3/1.png?raw=true" alt="Screenshot 1" width="30%">
+    <img src="https://github.com/me-js-bro/Screen-Shots/blob/main/i3/2.png?raw=true" alt="Screenshot 2" width="30%">
+    <img src="https://github.com/me-js-bro/Screen-Shots/blob/main/i3/3.png?raw=true" alt="Screenshot 3" width="30%">
+  </div>
+
+  <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around;">
+    <img src="https://github.com/me-js-bro/Screen-Shots/blob/main/i3/4.png?raw=true" alt="Screenshot 1" width="30%">
+    <img src="https://github.com/me-js-bro/Screen-Shots/blob/main/i3/5.png?raw=true" alt="Screenshot 2" width="30%">
+    <img src="https://github.com/me-js-bro/Screen-Shots/blob/main/i3/6.png?raw=true" alt="Screenshot 3" width="30%">
+  </div>
+</details>
+
+
 ## Technologies ##
 
 The following tools were used in this project:

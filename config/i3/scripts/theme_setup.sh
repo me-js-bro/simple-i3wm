@@ -21,16 +21,16 @@ fi
 source "$theme_file"
 
 # Function to change GTK theme
-change_gtk_theme() {
-  local gtk_theme="$1"
-  echo "Changing GTK theme to $gtk_theme"
-  gsettings set org.gnome.desktop.interface gtk-theme "$gtk_theme"
-  if [ $? -eq 0 ]; then
-    echo "GTK theme changed successfully"
-  else
-    echo "Failed to change GTK theme"
-  fi
-}
+# change_gtk_theme() {
+#   local gtk_theme="$1"
+#   echo "Changing GTK theme to $gtk_theme"
+#   gsettings set org.gnome.desktop.interface gtk-theme "$gtk_theme"
+#   if [ $? -eq 0 ]; then
+#     echo "GTK theme changed successfully"
+#   else
+#     echo "Failed to change GTK theme"
+#   fi
+# }
 
 
 case "$current" in
@@ -38,21 +38,21 @@ case "$current" in
         echo "Changing to darkforest"
         notify-send "Theme" "Changing theme to Darkforest"
         sed -i "s/current=.*/current=darkforest/g" "$theme_file"
-        change_gtk_theme "Everforest-Dark-Soft-BL-MB"
+        # change_gtk_theme "Everforest-Dark-Soft-BL-MB"
         # update_theme_config "darkforest"
         ;;
     "darkforest")
         echo "Changing to gruvbox"
         notify-send "Theme" "Changing theme to GruvBox"
         sed -i "s/current=.*/current=gruvbox/g" "$theme_file"
-        change_gtk_theme "Gruvbox-Dark-BL-LB"
+        # change_gtk_theme "Gruvbox-Dark-BL-LB"
         # update_theme_config "gruvbox"
         ;;
     "gruvbox")
         echo "Changing to nordic"
         notify-send "Theme" "Changing theme to Nordic"
         sed -i "s/current=.*/current=nordic/g" "$theme_file"
-        change_gtk_theme "Nordic-darker"
+        # change_gtk_theme "Nordic-darker"
         # update_theme_config "nordic"
         ;;
     *)
