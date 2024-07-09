@@ -3,6 +3,7 @@
 "$HOME/.config/polybar/launch.sh" #polybar
 feh --bg-scale "$HOME/.config/i3/.cache/current.png" #wallpaper
 "$HOME/.config/i3/scripts/pywal.sh"
+"$HOME/.config/i3/scripts/polkit.sh"
 
 keyboard="/usr/share/openbangla-keyboard"
 if [[ -d "$keyboard" ]]; then
