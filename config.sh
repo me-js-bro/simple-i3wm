@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # log files
 dir="$(dirname "$(realpath "$0")")"
 scripts="$dir/z_install-scripts"
@@ -10,17 +12,18 @@ source "$scripts/00-global.sh"
 info at "Now setting up the configs" && sleep 1
 
 dots=(
-    alacritty
     dunst
     fastfetch
     gtk-3.0
     gtk-4.0
     i3
+    kitty
     nvim
     nwg-look
     polybar
     qt5ct
     qt6ct
+    ranger
     rofi
 )
 
@@ -52,7 +55,6 @@ cp -r "$dir/config"/* "$HOME/.config/"
 if [[ -d "$HOME/.config/i3/scripts" ]]; then
     chmod +x "$HOME/.config/i3/scripts"/*
     info ok "Copied successfully!" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
-    exit 0
 else
     info er "Could not copy dotfiles..." 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
     exit 1

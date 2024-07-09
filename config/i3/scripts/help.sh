@@ -39,7 +39,7 @@ yad --width=$dynamic_width --height=$dynamic_height \
     --timeout-indicator=bottom \
 " = " "SUPER KEY (Windows Key)" "(Mod key)" \
 "" "" "" \
-" + Return" "Terminal" "(Alacritty)" \
+" + Return" "Terminal" "(Kitty)" \
 " + E" "Open File Manager" "(Thunar)" \
 "" "" "" \
 " + D" "App Launcher" "(Rofi)" \

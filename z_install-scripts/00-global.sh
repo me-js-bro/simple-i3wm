@@ -24,15 +24,15 @@ info() {
     local msg="$2"
 
     case $action in
-        at) printf "$att \n  $msg\n"
+        at) printf "\n$att \n  $msg\n"
         ;;
-        ac) printf "$acc \n  $msg\n"
+        ac) printf "\n$acc \n  $msg\n"
         ;;
         ok) printf "$ok \n  $msg\n\n"
         ;;
         nt) printf "$note \n  $msg\n"
         ;;
-        qs) printf "$qus \n  $msg\n"
+        qs) printf "\n$qus \n  $msg\n"
         ;;
         er) printf "\n$err \n  ${red}$msg${end}\n"
         ;;

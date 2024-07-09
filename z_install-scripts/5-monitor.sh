@@ -36,7 +36,7 @@ if [[ "$size" =~ ^[Yy]$ ]]; then
 
     info ac "${yellow}Setting your monitor resolution and refresh rate to ${res}p ${hz}Hz ${end}\n"
     sleep 2
-    xrandr --output $monitor --mode $res --rate $hz 2>&1 | tee -a "$log"
+    # xrandr --output $monitor --mode $res --rate $hz 2>&1 | tee -a "$log"
 
     startup="$HOME/.config/i3/scripts/startup.sh"
     if ! grep -q "xrandr --output $monitor --mode $res --rate $hz" "$startup"; then
@@ -45,7 +45,6 @@ if [[ "$size" =~ ^[Yy]$ ]]; then
     else
         info at "Monitor setup command already exists in startup script." 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
     fi
-    exit 0
 else
     info er "Sorry, could not find the correct resolution of your monitor...\n  Exiting without setting up monitor resulation and refresh rate...\n" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
 fi

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# it has a little bug.........
+
 i3_dir="$HOME/.config/i3"
 scripts_dir="$i3_dir/scripts"
 cache_dir="$i3_dir/.cache"

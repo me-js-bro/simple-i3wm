@@ -11,7 +11,6 @@ source "$dir/00-global.sh"
 
 # main packages
 packages=(
-    alacritty
     dunst
     eog
     feh
@@ -19,6 +18,7 @@ packages=(
     i3-wm
     i3lock
     jq
+    kitty
     maim
     neovim
     polybar

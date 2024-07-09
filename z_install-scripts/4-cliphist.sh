@@ -53,5 +53,4 @@ systemctl --user enable greenclip.service 2>&1 | tee -a "$log"
 systemctl --user start greenclip.service 2>&1 | tee -a "$log"
 
 info ok "Greenclip and Rofi clipboard manager setup complete!" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
-exit 0
 clear && sleep 1

@@ -6,6 +6,7 @@ rofi_theme="$HOME/.config/rofi/themes/rofi-clipboard.rasi"
 case $1 in
     --hist)
         greenclip print | rofi -dmenu -p "Clipboard" -theme "$rofi_theme" | xargs -r -d '\n' -I '{}' greenclip print '{}' | xclip -selection clipboard
+        echo "$(greenclip print | wc -l)"
         ;;
     --num) greenclip print | wc -l
         ;;

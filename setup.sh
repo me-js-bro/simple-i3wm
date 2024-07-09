@@ -87,6 +87,10 @@ if [[ "$device" =~ ^[Yy]$ ]]; then
     info ac "Starting script for touchpad setup"
     "$scripts/6-touchpad.sh"
 fi
+info qs "Would you like to install and set sddm theme? [ y/n ]"
+read -r -p "$(echo -e '\e[1;32mSelect: \e[1;0m')" sddm_man
+
+[[ "$sddm_man" =~ ^[Yy]$ ]] && "$scripts/7-sddm.sh"
 clear && sleep 1
 
 
@@ -121,8 +125,10 @@ if [[ "$reboot" =~ ^[Yy]$ ]]; then
     for time in 5 4 3 2 1; do
         info at "The system will reboot in ${time}s"
         sleep 1 && clear
+        systemctl reboot --now
     done
 else
     info at "The system should be rebooted to make the changes...\n  However, make sure to reboot later..\n\n  Enjoy (◠‿◠)"
 fi
+
 exit 0
