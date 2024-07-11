@@ -107,6 +107,10 @@ $ ./setup.sh
 # If it finds any error and exits the script, please check the Log files in the simple-i3wm/Logs directory.
 ```
 
+## Discord ##
+
+Let's discuss about the improvement of the config [Here](https://discordapp.com/channels/1260810946108981258/1260810946108981261)
+
 ## License ##
 
 This project is under license from MIT. For more details, see the [LICENSE](LICENSE) file.
