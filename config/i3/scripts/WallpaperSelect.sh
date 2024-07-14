@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# it has a little bug.........
-
 i3_dir="$HOME/.config/i3"
 scripts_dir="$i3_dir/scripts"
 cache_dir="$i3_dir/.cache"
@@ -13,9 +11,9 @@ fi
 
 wallpaper_dir="$i3_dir/wallpapers/$current"
 
-pics=($(find ${wallpaper_dir} -type f \( -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" -o -name "*.gif" \)))
-random_pic=${pics[ $RANDOM % ${#pics[@]} ]}
-RANDOM_PIC_NAME="${#random_pic[@]}. random"
+pics=($(find "$wallpaper_dir" -type f \( -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" -o -name "*.gif" \)))
+random_pic=${pics[RANDOM % ${#pics[@]}]}
+RANDOM_PIC_NAME="Random"
 
 # Rofi command ( style )
 case $1 in
@@ -28,19 +26,17 @@ case $1 in
 esac
 
 menu() {
-  for i in "${!pics[@]}"; do
-    # Displaying .gif to indicate animated images
-    if [[ -z $(echo "${pics[$i]}" | grep .gif$) ]]; then
-      printf "$(echo "${pics[$i]}" | cut -d. -f1)\x00icon\x1f${wallDIR}/${pics[$i]}\n"
-    else
-      printf "${pics[$i]}\n"
-    fi
+  for pic in "${pics[@]}"; do
+    printf "%s\x00icon\x1f%s\n" "$(basename "$pic")" "$pic"
   done
-
-  printf "$RANDOM_PIC_NAME\n"
+  printf "%s\x00icon\x1frandom.png\n" "$RANDOM_PIC_NAME"
 }
 
 main() {
+    # Debug: Print the list of wallpapers
+    echo "Available wallpapers:"
+    menu
+
     choice=$(menu | ${rofi_command})
 
     # No choice case
@@ -49,20 +45,22 @@ main() {
     fi
 
     # Random choice case
-    if [ "$choice" = "$RANDOM_PIC_NAME" ]; then
-      feh --bg-scale "${wallDIR}/${random_pic}"
-      exit 0
+    if [[ $choice == "$RANDOM_PIC_NAME" ]]; then
+      selected_pic="$random_pic"
+    else
+      selected_pic="$wallpaper_dir/$choice"
     fi
 
-
-    if [[ $pic_index -ne -1 ]]; then
-      notify-send -i "${wallDIR}/${pics[$pic_index]}" "Changing wallpaper"
-      feh --bg-scale "${wallDIR}/${pics[$pic_index]}"
+    # Set the selected wallpaper
+    if [[ -f "$selected_pic" ]]; then
+      feh --bg-scale "$selected_pic"
+      ln -sf "$selected_pic" "$cache_dir/current.png"
+      notify-send -i "$selected_pic" "Changing wallpaper"
     else
-      echo "Image not found."
+      echo "Image not found: $selected_pic"
       exit 1
     fi
-  }
+}
 
 # Check if rofi is already running
 if pidof rofi > /dev/null; then
@@ -76,5 +74,3 @@ sleep 0.5
 "$scripts_dir/pywal.sh"
 sleep 0.2
 "$scripts_dir/Refresh.sh"
-
-
