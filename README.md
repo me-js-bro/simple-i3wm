@@ -32,6 +32,7 @@
   <a href="#features">Features</a> &#xa0; | &#xa0;
   <a href="#technologies">Technologies</a> &#xa0; | &#xa0;
   <a href="#requirements">Requirements</a> &#xa0; | &#xa0;
+  <a href="#keybinds">Keybinds</a> &#xa0; | &#xa0;
   <a href="#license">License</a> &#xa0; | &#xa0;
   <a href="https://github.com/me-js-bro" target="_blank">Author</a>
 </p>
@@ -106,6 +107,67 @@ $ ./setup.sh
 
 # If it finds any error and exits the script, please check the Log files in the simple-i3wm/Logs directory.
 ```
+
+## Keybinds ##
+
+| Keybind                  | Action                                      |
+|--------------------------|---------------------------------------------|
+| `$mod+q`                 | Kill the focused window                     |
+| `$mod+Return`            | Open terminal (kitty) in workspace 1        |
+| `$mod+d`                 | Launch rofi menu                            |
+| `$mod+e`                 | Open file manager (thunar) in workspace 1   |
+| `$mod+b`                 | Open Firefox in workspace 2                 |
+| `$mod+Shift+b`           | Open any other browser in workspace 2       |
+| `$mod+c`                 | Open VS Code in workspace 3                 |
+| `$mod+Shift+l`           | Lock screen                                 |
+| `$mod+w`                 | Change wallpaper                            |
+| `$mod+Shift+w`           | Select wallpaper (style 1)                  |
+| `$mod+Control+w`         | Select wallpaper (style 2)                  |
+| `$mod+Shift+c`           | Show clipboard history                      |
+| `$mod+$alt+c`            | Clear clipboard history                     |
+| `$mod+t`                 | Change theme                                |
+| `$mod+x`                 | Show rofi power menu                        |
+| `$mod+Tab`               | Show active windows                         |
+| `$mod+Shift+d`           | Show rofi emoji                             |
+| `$mod+$alt+b`            | Change shell theme                          |
+| `$mod+o`                 | Open OBS in workspace 4                     |
+| `$mod+Shift+h`           | Show help                                   |
+| `Control+Escape`         | Hide/unhide Polybar                         |
+| `Control+$alt+Escape`    | Reload Polybar                              |
+| `Control+Up`             | Launch Polybar at top                       |
+| `Control+Down`           | Launch Polybar at bottom                    |
+| `F9`                     | Toggle volume (mute/unmute)                 |
+| `F10`                    | Decrease volume                             |
+| `F11`                    | Increase volume                             |
+| `Print`                  | Full screen screenshot (3s delay)           |
+| `$mod+Print`             | Screenshot of selected area                 |
+| `$mod+Shift+Print`       | Crop screenshot                             |
+| `$mod+h`                 | Focus left                                  |
+| `$mod+j`                 | Focus right                                 |
+| `$mod+u`                 | Focus up                                    |
+| `$mod+m`                 | Focus down                                  |
+| `$mod+Left`              | Focus left (cursor key)                     |
+| `$mod+Down`              | Focus down (cursor key)                     |
+| `$mod+Up`                | Focus up (cursor key)                       |
+| `$mod+Right`             | Focus right (cursor key)                    |
+| `$mod+Shift+j`           | Move window left                            |
+| `$mod+Shift+semicolon`   | Move window right                           |
+| `$mod+Shift+u`           | Move window up                              |
+| `$mod+Shift+m`           | Move window down                            |
+| `$mod+Shift+Left`        | Move window left (cursor key)               |
+| `$mod+Shift+Down`        | Move window down (cursor key)               |
+| `$mod+Shift+Up`          | Move window up (cursor key)                 |
+| `$mod+Shift+Right`       | Move window right (cursor key)              |
+| `$mod+Shift+v`           | Split window vertically                     |
+| `$mod+f`                 | Toggle fullscreen mode                      |
+| `$mod+s`                 | Change to stacking layout                   |
+| `$mod+v`                 | Toggle floating mode                        |
+| `$mod+space`             | Focus between tiling/floating windows       |
+| `$mod+a`                 | Focus parent container                      |
+| `$mod+Control+c`         | Reload configuration                        |
+| `$mod+Shift+r`           | Restart i3 inplace                          |
+| `$mod+Shift+x`           | Exit i3                                     |
+
 
 ## Discord ##
 
