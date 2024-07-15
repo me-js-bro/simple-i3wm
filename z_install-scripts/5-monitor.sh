@@ -38,9 +38,9 @@ if [[ "$size" =~ ^[Yy]$ ]]; then
     sleep 2
     # xrandr --output $monitor --mode $res --rate $hz 2>&1 | tee -a "$log"
 
-    startup="$HOME/.config/i3/scripts/startup.sh"
-    if ! grep -q "xrandr --output $monitor --mode $res --rate $hz" "$startup"; then
-        echo -e "\nxrandr --output $monitor --mode $res --rate $hz" >> "$startup"
+    startup="$HOME/.config/i3/configs/startup.conf"
+    if ! grep -q "exec_always xrandr --output $monitor --mode $res --rate $hz" "$startup"; then
+        echo -e "\nexec_always xrandr --output $monitor --mode $res --rate $hz" >> "$startup"
         info dn "Monitor setup command added to startup script." 
     else
         info at "Monitor setup command already exists in startup script." 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
