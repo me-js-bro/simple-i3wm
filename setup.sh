@@ -52,6 +52,10 @@ read -r -p "$(echo -e '\e[1;32m  Select: \e[1;0m')" ans
 chmod +x "$scripts"/*
 clear
 
+# full system update
+info ac "Updating your system"
+sudo pacman -Syyu --noconfirm
+
 # Function to check for the presence of a battery
 is_laptop() {
     if [[ -d "/sys/class/power_supply/BAT0" ]]; then
@@ -81,7 +85,7 @@ fi
 "$scripts/2-other_pkg.sh"
 "$scripts/3-fonts.sh"
 "$scripts/4-cliphist.sh"
-"$scripts/5-monitor.sh"
+# "$scripts/5-monitor.sh"
 
 if [[ "$device" =~ ^[Yy]$ ]]; then
     info ac "Starting script for touchpad setup"

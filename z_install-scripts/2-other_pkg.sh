@@ -15,7 +15,6 @@ other_packages=(
     curl
     fastfetch
     ffmpeg
-    ibus
     imagemagick
     kvantum
     libinput

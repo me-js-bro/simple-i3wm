@@ -24,17 +24,18 @@ packages=(
     polybar
     polkit-gnome
     qt5ct
+    qt5-svg
+    qt5-graphicaleffects
+    qt5-quickcontrols
     qt6ct
     qt6-svg
+    ranger
     rofi
 )
 
 aur_packages=(
     nwg-look
     picom-simpleanims-git
-    qt5-svg
-    qt5-quickcontrols2
-    qt5-graphicaleffects
 )
 
 # # thunar file manager
@@ -54,10 +55,14 @@ for pkgs in "${packages[@]}"; do
     install "$pkgs" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
 done
 
+clear
+
 # install aur packages
 for pkgs in "${aur_packages[@]}"; do
     install_Aur "$pkgs" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
 done
+
+clear
 
 # install thunar
 for pkgs in "${thunar[@]}"; do
