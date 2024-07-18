@@ -35,6 +35,8 @@ elif [[ "$aur" == "2" ]]; then
     sudo rm -rf yay
 fi
 
+aur_helper=$(command -v paru || command -v yay)
+
 if [[ -n "$aur_helper" ]]; then
     info ok "Aur Helper was installed successfully!" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
     sleep 1

@@ -46,15 +46,15 @@ sleep 2 && clear
 info qs "Would you like to continue with the installation? [ y/n ]"
 read -r -p "$(echo -e '\e[1;32m  Select: \e[1;0m')" ans
 
-[[ "$ans" =~ ^[Yy]$ ]] && info ac "Starting the script here.."; sleep 1 || { info "${red}Exiting the script here...${end}" ; exit 1; }
+[[ "$ans" =~ ^[Yy]$ ]] && info ac "Starting the script here.."; sleep 1 || { info er "Exiting the script here.." ; exit 1; }
 
 # make all the scripts executable
 chmod +x "$scripts"/*
 clear
 
 # full system update
-info ac "Updating your system"
-sudo pacman -Syyu --noconfirm
+info ac "Updating the system"
+sudo pacman -Syyu --noconfirm 2>&1 | tee -a "$log"
 
 # Function to check for the presence of a battery
 is_laptop() {
@@ -73,28 +73,28 @@ fi
 
 aur_helper=$(command -v paru || command -v yay)
 if [[ -n "$aur_helper" ]]; then
-    info ok "Aur Helper was located in $aur_helper. Moving on.."
+    info ok "Aur Helper was located in $aur_helper. Moving on.." 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
 else
-    "$scripts/01-aur.sh"
+    "$scripts/01-aur.sh" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
 fi
 
 
 #==========( running scripts )==========#
 
-"$scripts/1-main_pkg.sh"
-"$scripts/2-other_pkg.sh"
-"$scripts/3-fonts.sh"
-"$scripts/4-cliphist.sh"
-# "$scripts/5-monitor.sh"
+"$scripts/1-main_pkg.sh" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
+"$scripts/2-other_pkg.sh" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
+"$scripts/3-fonts.sh" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
+"$scripts/4-cliphist.sh" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
+# "$scripts/5-monitor.sh" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
 
 if [[ "$device" =~ ^[Yy]$ ]]; then
     info ac "Starting script for touchpad setup"
-    "$scripts/6-touchpad.sh"
+    "$scripts/6-touchpad.sh" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
 fi
 info qs "Would you like to install and set sddm theme? [ y/n ]"
 read -r -p "$(echo -e '\e[1;32mSelect: \e[1;0m')" sddm_man
 
-[[ "$sddm_man" =~ ^[Yy]$ ]] && "$scripts/7-sddm.sh"
+[[ "$sddm_man" =~ ^[Yy]$ ]] && "$scripts/7-sddm.sh" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
 clear && sleep 1
 
 
@@ -106,7 +106,7 @@ read -r -p "$(echo -e '\e[1;32m  Select: \e[1;0m')" keyboard
 if [[ "$keyboard" =~ ^[Yy]$ ]]; then
     info ac "Installing ${orange}OpenBangla-Keyboard${end}"
 
-    bash -c "$(wget -q https://raw.githubusercontent.com/me-js-bro/Build-OpenBangla-Keyboard/main/build.sh -O -)"
+    bash -c "$(wget -q https://raw.githubusercontent.com/me-js-bro/Build-OpenBangla-Keyboard/main/build.sh -O -)" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
 fi
 
 clear && sleep 1
@@ -116,7 +116,7 @@ clear && sleep 1
 #==========( config setup )==========#
 
 chmod +x "$dir/config.sh"
-"$dir/config.sh"
+"$dir/config.sh" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
 clear
 
 #==========( end )==========#
@@ -127,10 +127,9 @@ read -r -p "$(echo -e '\e[1;32m  Select: \e[1;0m')" reboot
 
 if [[ "$reboot" =~ ^[Yy]$ ]]; then
     for time in 5 4 3 2 1; do
-        info at "The system will reboot in ${time}s"
-        sleep 1 && clear
-        systemctl reboot --now
+        info at "The system will reboot in ${time}s" && sleep 1 && clear
     done
+        systemctl reboot --now
 else
     info at "The system should be rebooted to make the changes...\n  However, make sure to reboot later..\n\n  Enjoy (◠‿◠)"
 fi
