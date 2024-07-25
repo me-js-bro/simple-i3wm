@@ -16,7 +16,7 @@ send_notification() {
 # Function to hide the cursor and store its position
 hide_cursor() {
     eval $(xdotool getmouselocation --shell)
-    xdotool mousemove -- -100 -100
+    xdotool mousemove -- -100 1080
 }
 
 # Function to restore the cursor to its original position
@@ -28,8 +28,16 @@ take_screenshot() {
     maim "$save_dir/$save_file"
 }
 
-case "$1" in
-    "--full")
+option1="Fullscreen (delay 3 sec)"
+option2="Selected Area"
+option3="Crop Screenshot"
+
+options="$option1\n$option2\n$option3"
+
+choice=$(echo -e "$options" | rofi -dmenu -replace -config ~/.config/rofi/themes/config-screenshots.rasi)
+
+case "$choice" in
+    $option1)
         for i in 3 2 1; do
             send_notification "$i"
         done
@@ -38,12 +46,12 @@ case "$1" in
         take_screenshot
         restore_cursor
         ;;
-    "--select")
+    $option2)
         hide_cursor
         maim -s "$save_dir/$save_file"
         restore_cursor
         ;;
-    "--crop")
+    $option3)
         hide_cursor
         maim -u | feh -F - &
         maim -s -k "$save_dir/$save_file"
@@ -57,6 +65,6 @@ case "$1" in
 esac
 
 if [ -f "$save_dir/$save_file" ]; then
-    notify-send "Saved" -i "$save_dir/$save_file"
+    notify-send "Saved in" "$save_dir" -i "$save_dir/$save_file"
 fi
 
