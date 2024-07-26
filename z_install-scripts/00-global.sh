@@ -48,7 +48,7 @@ aur_helper=$(command -v yay || command -v paru) # Find the AUR helper
 # Check if the package is installed
 check() {
     local is_installed
-    is_installed=$(sudo "$package_manager" -Qs "$1" &> /dev/null; echo $?)
+    is_installed=$(sudo "$package_manager" -Qi "$1" &> /dev/null; echo $?)
     
     if [ "$is_installed" -eq 0 ]; then
         case $2 in

@@ -54,6 +54,7 @@ cp -r "$dir/config"/* "$HOME/.config/"
 
 if [[ -d "$HOME/.config/i3/scripts" ]]; then
     chmod +x "$HOME/.config/i3/scripts"/*
+    chmod +x "$HOME/.config/ranger/scope.sh"
     info ok "Copied successfully!" 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
 else
     info er "Could not copy dotfiles..." 2>&1 | tee -a >(sed 's/\x1B\[[0-9;]*[JKmsu]//g' >> "$log")
@@ -67,7 +68,7 @@ clear && sleep 1
 theme_dir="$dir/assets"
 theme="$theme_dir/Nordic-darker.tar.xz"
 icon="$theme_dir/Icon_TelaDracula.tar.gz"
-cursor="$theme_dir/Nordic-darker.tar.xz"
+cursor="$theme_dir/Nordzy-cursors.tar.gz"
 
 # creating icons and theme directory
 mkdir -p ~/.themes
